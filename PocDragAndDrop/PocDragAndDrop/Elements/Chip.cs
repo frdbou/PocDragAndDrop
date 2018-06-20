@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace PocDragAndDrop.Elements
 {
-   public  class Chip:ContentView
+   public  class Chip:Frame
     {
         double x;
         double y;
@@ -15,14 +15,15 @@ namespace PocDragAndDrop.Elements
 
         public Chip()
         {
-            Frame frame = new Frame();
-            frame.MinimumHeightRequest = this.MinimumHeightRequest;
-            frame.MinimumWidthRequest = this.MinimumWidthRequest;
-            frame.CornerRadius = (float)this.MinimumHeightRequest / 2;
+            
+           
             _xInitiale = this.TranslationX;
             _yInitiale = this.TranslationY;
             x = _xInitiale;
             y = _yInitiale;
+            var panGesture = new PanGestureRecognizer();
+            panGesture.PanUpdated += Move_chip;
+            GestureRecognizers.Add(panGesture);
         }
 
 
@@ -42,7 +43,7 @@ namespace PocDragAndDrop.Elements
                     if ((parent is Layout) && (this.TranslationX == _xInitiale) && (this.TranslationY == _yInitiale))
                     {
 
-                        ((AbsoluteLayout)parent).Children.Add(new RedChip
+                        ((AbsoluteLayout)parent).Children.Add(new Chip
                         {
                             TranslationX = 0,
                             TranslationY = 0

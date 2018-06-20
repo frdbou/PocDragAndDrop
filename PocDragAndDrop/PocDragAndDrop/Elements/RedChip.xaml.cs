@@ -16,17 +16,48 @@ namespace PocDragAndDrop.Elements
         double y;
         private double _xInitiale;
         private double _yInitiale;
+        private Color _storedColor;
+
+        #region bindable property
+        public Color ChipColor
+        {
+            get => (Color)GetValue(SizeProperty);
+            set => SetValue(SizeProperty, value);
+        }
+
+        public static readonly BindableProperty SizeProperty = BindableProperty.Create(propertyName: "ChipColor",
+                                                                                                    returnType: typeof(Color),
+                                                                                                    declaringType: typeof(RedChip),
+                                                                                                    defaultValue: Color.Red,
+                                                                                                    propertyChanged: ChipColorPropertyChanged);
+
+
+        private static void ChipColorPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var control = (RedChip)bindable;
+            if (control.Content!=null)
+            {
+
+            control.Content.BackgroundColor = control.ChipColor;
+            }
+        }
+
+        #endregion bindable property
 
         public RedChip()
         {
             InitializeComponent();
-
             _xInitiale = this.TranslationX;
             _yInitiale = this.TranslationY;
             x = _xInitiale;
             y = _yInitiale;
+            this.Content.BackgroundColor = ChipColor;
+            _storedColor = ChipColor;
+
 
         }
+         
+        
 
         public void Move_chip(object sender, PanUpdatedEventArgs e)
         {
@@ -40,12 +71,10 @@ namespace PocDragAndDrop.Elements
 
                     if ((parent is Layout) && (this.TranslationX == _xInitiale) && (this.TranslationY == _yInitiale))
                     {
-                       
-                        ((AbsoluteLayout)parent).Children.Add(new RedChip
-                        {
-                            TranslationX = 0,
-                            TranslationY = 0
-                        });
+                        RedChip aRedChip = new RedChip();
+                        aRedChip.TranslateTo(0, 0, 1);
+                        aRedChip.Content.BackgroundColor = _storedColor;
+                        ((AbsoluteLayout)parent).Children.Add(aRedChip);
                        
                     }
                     break;
@@ -53,8 +82,8 @@ namespace PocDragAndDrop.Elements
 
                 case GestureStatus.Running:
 
-                    x = Math.Max(0, x + e.TotalX);
-                    y = Math.Max(0, y + e.TotalY);
+                    x =  x + e.TotalX;
+                    y =  y + e.TotalY;
 
                     this.TranslateTo(x, y, 1, Easing.SinInOut);
                     break;

@@ -3,10 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PocDragAndDrop.Elements.RedChip">
   <ContentView.Content>
-        <Frame BackgroundColor="Red"
-               CornerRadius="20"
-               MinimumHeightRequest="40"
-               MinimumWidthRequest="40"
+        <Frame CornerRadius="30"
+               Padding="0"
+               HeightRequest="60"
+               WidthRequest="60"
+               MinimumHeightRequest="60"
+               MinimumWidthRequest="60"
                
               >
             <Frame.GestureRecognizers>

@@ -4,11 +4,37 @@
              xmlns:elmts="clr-namespace:PocDragAndDrop.Elements"
              x:Class="PocDragAndDrop.Page1">
     <ContentPage.Content>
-        
-        <AbsoluteLayout BackgroundColor="Yellow"
-                        VerticalOptions="FillAndExpand"
-                        HorizontalOptions="FillAndExpand">
-            <elmts:RedChip/>
+        <StackLayout HorizontalOptions="Start"
+                     VerticalOptions="Start"
+                     Orientation="Vertical">
+            
+        <AbsoluteLayout 
+                        HorizontalOptions="Start"
+                        VerticalOptions="Start">
+            <elmts:RedChip
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                ChipColor="Red"
+                />
         </AbsoluteLayout>
+            <AbsoluteLayout 
+                        HorizontalOptions="Start"
+                        VerticalOptions="Start">
+                <elmts:RedChip
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                ChipColor="Orange"
+                />
+            </AbsoluteLayout>
+            <AbsoluteLayout 
+                        HorizontalOptions="Start"
+                        VerticalOptions="Start">
+                <elmts:RedChip
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                ChipColor="Green"
+                />
+            </AbsoluteLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

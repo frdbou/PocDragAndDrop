@@ -7,7 +7,7 @@
     <StackLayout x:Name="ButtonLayout"
                  HorizontalOptions="CenterAndExpand"
                  VerticalOptions="CenterAndExpand"
-                 BackgroundColor="#AAAAAA"
+                 BackgroundColor="#DDDDDD"
                  >
         <Button x:Name="button1"
                 Text="Premier test"
@@ -15,6 +15,9 @@
         <Button x:Name="button2"
                 Text="deuxième test"
                 Clicked="button2_Clicked"/>
+        <Button x:Name="button3"
+                Text="troisième test"
+                Clicked="button3_Clicked"/>
     </StackLayout>
 
 </ContentPage>
