@@ -6,15 +6,13 @@
     
         <ContentPage.Content>
             <AbsoluteLayout BackgroundColor="Yellow"
-                        VerticalOptions="FillAndExpand"
-                        HorizontalOptions="FillAndExpand">
-                <!--<elmts:Chip BackgroundColor="Red"
-                            HeightRequest="40"
-                            WidthRequest="40"
-                            MinimumHeightRequest="40"
-                            MinimumWidthRequest="40"
-                            CornerRadius="20"
-                                />-->
+                            HeightRequest="100"
+                            WidthRequest="100"
+                            VerticalOptions="Start"
+                            HorizontalOptions="Start">
+            <elmts:AbsChip ChipColor="Red">
+                
+            </elmts:AbsChip>
             </AbsoluteLayout>
         </ContentPage.Content>
    
