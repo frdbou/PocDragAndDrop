@@ -8,13 +8,13 @@
             <AbsoluteLayout BackgroundColor="Yellow"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand">
-                <elmts:Chip BackgroundColor="Red"
+                <!--<elmts:Chip BackgroundColor="Red"
                             HeightRequest="40"
                             WidthRequest="40"
                             MinimumHeightRequest="40"
                             MinimumWidthRequest="40"
                             CornerRadius="20"
-                                />
+                                />-->
             </AbsoluteLayout>
         </ContentPage.Content>
    

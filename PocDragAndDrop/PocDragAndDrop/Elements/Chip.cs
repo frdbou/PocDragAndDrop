@@ -5,25 +5,62 @@ using Xamarin.Forms;
 
 namespace PocDragAndDrop.Elements
 {
-   public  class Chip:Frame
+   public  class Chip: ContentView
     {
         double x;
         double y;
         private double _xInitiale;
         private double _yInitiale;
 
+        #region bindable property
+
+        public Color ChipColor
+        {
+            get => (Color)GetValue(SizeProperty);
+            set => SetValue(SizeProperty, value);
+        }
+
+        public static readonly BindableProperty SizeProperty = BindableProperty.Create(propertyName: "ChipColor",
+                                                                                                    returnType: typeof(Color),
+                                                                                                    declaringType: typeof(Chip),
+                                                                                                    defaultValue: Color.Transparent,
+                                                                                                    propertyChanged: ChipColorPropertyChanged);
+
+        private static void ChipColorPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var control = (Chip)bindable;
+            if (control.Content != null)
+            {
+                control.Content.BackgroundColor = control.ChipColor;
+            }
+        }
+
+        #endregion bindable property
+
 
         public Chip()
         {
-            
-           
+            Frame frame = new Frame
+            {
+                Padding = new Thickness(0),
+                HeightRequest = 60,
+                WidthRequest = 60,
+                CornerRadius = 30,
+                MinimumHeightRequest = 60,
+                MinimumWidthRequest = 60,
+                BackgroundColor = ChipColor
+            };
+
             _xInitiale = this.TranslationX;
             _yInitiale = this.TranslationY;
             x = _xInitiale;
             y = _yInitiale;
             var panGesture = new PanGestureRecognizer();
             panGesture.PanUpdated += Move_chip;
-            GestureRecognizers.Add(panGesture);
+            System.Diagnostics.Debug.WriteLine(panGesture.TouchPoints);
+            
+            frame.GestureRecognizers.Add(panGesture);
+            this.Content = frame;
         }
 
 
@@ -43,11 +80,10 @@ namespace PocDragAndDrop.Elements
                     if ((parent is Layout) && (this.TranslationX == _xInitiale) && (this.TranslationY == _yInitiale))
                     {
 
-                        ((AbsoluteLayout)parent).Children.Add(new Chip
-                        {
-                            TranslationX = 0,
-                            TranslationY = 0
-                        });
+                        Chip aChip = new Chip();
+                        aChip.TranslateTo(0, 0, 1);
+                        aChip.Content.BackgroundColor = ((View)sender).BackgroundColor;
+                        ((AbsoluteLayout)parent).Children.Add(aChip);
 
                     }
                     break;
@@ -55,8 +91,8 @@ namespace PocDragAndDrop.Elements
 
                 case GestureStatus.Running:
 
-                    x = Math.Max(0, x + e.TotalX);
-                    y = Math.Max(0, y + e.TotalY);
+                    x =  x + e.TotalX;
+                    y = y + e.TotalY;
 
                     this.TranslateTo(x, y, 1, Easing.SinInOut);
                     break;
