@@ -81,7 +81,7 @@ namespace PocDragAndDrop.Elements
                     {
 
                         Chip aChip = new Chip();
-                        aChip.TranslateTo(0, 0, 1);
+                        aChip.TranslateTo(0, 0);
                         aChip.Content.BackgroundColor = ((View)sender).BackgroundColor;
                         ((AbsoluteLayout)parent).Children.Add(aChip);
 
@@ -94,7 +94,7 @@ namespace PocDragAndDrop.Elements
                     x =  x + e.TotalX;
                     y = y + e.TotalY;
 
-                    this.TranslateTo(x, y, 1, Easing.SinInOut);
+                    this.TranslateTo(x, y,42, Easing.Linear);
                     break;
 
                 case GestureStatus.Completed:
