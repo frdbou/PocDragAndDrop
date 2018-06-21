@@ -11,6 +11,7 @@ namespace PocDragAndDrop.Elements
         double y;
         private double _xInitiale;
         private double _yInitiale;
+        private bool _moved;
 
         #region bindable property
 
@@ -52,16 +53,15 @@ namespace PocDragAndDrop.Elements
                 BackgroundColor = ChipColor
             };
 
-            _xInitiale = this.TranslationX;
-            _yInitiale = this.TranslationY;
-            x = _xInitiale;
-            y = _yInitiale;
             var panGesture = new PanGestureRecognizer();
             panGesture.PanUpdated += Move_chip;
-            System.Diagnostics.Debug.WriteLine(panGesture.TouchPoints);
-
             frame.GestureRecognizers.Add(panGesture);
             this.Content = frame;
+            //_xInitiale = this.X;
+            //_yInitiale = this.Y;
+            //x = _xInitiale;
+            //y = _yInitiale;
+            _moved = false;
         }
 
 
@@ -76,11 +76,12 @@ namespace PocDragAndDrop.Elements
                     View parent = (View)this.Parent;
 
 
-                    if ((parent is Layout) && (this.TranslationX == _xInitiale) && (this.TranslationY == _yInitiale))
+                    if ((parent is Layout)&& ! _moved)
                     {
 
                         AbsChip aChip = new AbsChip();
-                        AbsoluteLayout.SetLayoutBounds(aChip, new Rectangle(_xInitiale, _xInitiale, this.Width, this.Height));
+                        aChip._moved = false;
+                        AbsoluteLayout.SetLayoutBounds(aChip, new Rectangle(this.X, this.Y, this.Width, this.Height));
                         AbsoluteLayout.SetLayoutFlags(aChip, AbsoluteLayoutFlags.None);
                         aChip.Content.BackgroundColor = ((View)sender).BackgroundColor;
                         ((AbsoluteLayout)parent).Children.Add(aChip);
