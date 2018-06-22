@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+    <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:elmts="clr-namespace:PocDragAndDrop.Elements"
+                 x:Class="PocDragAndDrop.Page5">
+        <ContentPage.Content>
+            <AbsoluteLayout HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+
+                <BoxView x:Name="DragZone"
+                         AbsoluteLayout.LayoutBounds="0.5,0.5,0.5,0.5"
+                         AbsoluteLayout.LayoutFlags="All"
+                         Color="Pink" />
+               
+                <AbsoluteLayout BackgroundColor="Yellow"
+                                HeightRequest="200"
+                                WidthRequest="100"
+                                VerticalOptions="Start"
+                                HorizontalOptions="Start">
+                    <elmts:AbsChip x:Name="RedOne"
+                                   ChipColor="Red"
+                                   XMinimun="{Binding Source={x:Reference DragZone},Path=X }"
+                                   YMinimun="{Binding Source={x:Reference DragZone},Path=Y }"
+                                   DraggableZoneWidth="{Binding Source={x:Reference DragZone},Path=Width }"
+                                   DraggableZoneHeigth="{Binding Source={x:Reference DragZone},Path=Height }" />
+                    <elmts:AbsChip ChipColor="Orange"
+                                    XMinimun="{Binding Source={x:Reference DragZone},Path=X }"
+                                   YMinimun="{Binding Source={x:Reference DragZone},Path=Y }"
+                                   DraggableZoneWidth="{Binding Source={x:Reference DragZone},Path=Width }"
+                                   DraggableZoneHeigth="{Binding Source={x:Reference DragZone},Path=Height }"
+                                   AbsoluteLayout.LayoutBounds="0,60,60,60"
+                                   AbsoluteLayout.LayoutFlags="None" />
+                    <elmts:AbsChip ChipColor="Green"
+                                    XMinimun="{Binding Source={x:Reference DragZone},Path=X }"
+                                   YMinimun="{Binding Source={x:Reference DragZone},Path=Y }"
+                                   DraggableZoneWidth="{Binding Source={x:Reference DragZone},Path=Width }"
+                                   DraggableZoneHeigth="{Binding Source={x:Reference DragZone},Path=Height }" 
+                                   AbsoluteLayout.LayoutBounds="0,120,60,60"
+                                   AbsoluteLayout.LayoutFlags="None" />
+                </AbsoluteLayout>
+            </AbsoluteLayout>
+        </ContentPage.Content>
+    </ContentPage>

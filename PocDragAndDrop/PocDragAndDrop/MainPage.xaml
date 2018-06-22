@@ -18,6 +18,12 @@
         <Button x:Name="button3"
                 Text="troisième test"
                 Clicked="button3_Clicked"/>
+        <Button x:Name="button4"
+                Text="Quatrième test"
+                Clicked="button4_Clicked"/>
+        <Button x:Name="button5"
+                Text="Cinquième test"
+                Clicked="button5_Clicked"/>
     </StackLayout>
 
 </ContentPage>
