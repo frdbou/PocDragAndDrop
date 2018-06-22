@@ -57,10 +57,7 @@ namespace PocDragAndDrop.Elements
             panGesture.PanUpdated += Move_chip;
             frame.GestureRecognizers.Add(panGesture);
             this.Content = frame;
-            //_xInitiale = this.X;
-            //_yInitiale = this.Y;
-            //x = _xInitiale;
-            //y = _yInitiale;
+          
             _moved = false;
         }
 
@@ -85,15 +82,27 @@ namespace PocDragAndDrop.Elements
                         AbsoluteLayout.SetLayoutFlags(aChip, AbsoluteLayoutFlags.None);
                         aChip.Content.BackgroundColor = ((View)sender).BackgroundColor;
                         ((AbsoluteLayout)parent).Children.Add(aChip);
+                       
 
                     }
+
+                    _xInitiale = this.X;
+                    _yInitiale = this.Y;
                     break;
 
 
                 case GestureStatus.Running:
+                    if (Device.RuntimePlatform==Device.Android)
+                    {
 
-                    x = x + e.TotalX;
-                    y = y + e.TotalY;
+                        x = x + e.TotalX;
+                        y = y + e.TotalY;
+                    }
+                    else
+                    {
+                        x = e.TotalX+_xInitiale;
+                        y = e.TotalY+_yInitiale;
+                    }
                     AbsoluteLayout.SetLayoutBounds(this, new Rectangle(x, y, this.Width, this.Height));
                     AbsoluteLayout.SetLayoutFlags(this, AbsoluteLayoutFlags.None);
                     break;

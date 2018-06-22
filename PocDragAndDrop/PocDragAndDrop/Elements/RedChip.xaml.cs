@@ -66,8 +66,17 @@ namespace PocDragAndDrop.Elements
 
                 case GestureStatus.Running:
 
-                    x = x + e.TotalX;
-                    y = y + e.TotalY;
+                    if (Device.RuntimePlatform == Device.Android)
+                    {
+
+                        x = x + e.TotalX;
+                        y = y + e.TotalY;
+                    }
+                    else
+                    {
+                        x = e.TotalX + _xInitiale;
+                        y = e.TotalY + _yInitiale;
+                    }
 
                     this.TranslateTo(x, y, 1, Easing.SinInOut);
                     break;

@@ -86,13 +86,23 @@ namespace PocDragAndDrop.Elements
                         ((AbsoluteLayout)parent).Children.Add(aChip);
 
                     }
+
                     break;
 
 
                 case GestureStatus.Running:
 
-                    x =  x + e.TotalX;
-                    y = y + e.TotalY;
+                    if (Device.RuntimePlatform == Device.Android)
+                    {
+
+                        x = x + e.TotalX;
+                        y = y + e.TotalY;
+                    }
+                    else
+                    {
+                        x = e.TotalX + _xInitiale;
+                        y = e.TotalY + _yInitiale;
+                    }
 
                     this.TranslateTo(x, y,42, Easing.Linear);
                     break;
